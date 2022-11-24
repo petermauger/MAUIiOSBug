@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:iOSCellReuseBug"
+             xmlns:views="clr-namespace:iOSCellReuseBug.Views"
+             x:Class="iOSCellReuseBug.Views.TemplateSelectorPage"
+             x:DataType="views:TemplateSelectorPage"
+             x:Name="this">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="cellTemplate" x:DataType="local:CellViewModel">
+            <ViewCell>
+                <Grid HeightRequest="{Binding HeightValue}" BackgroundColor="{Binding BackgroundColor}"/>
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="scrollableTemplate" x:DataType="local:ScrollableCellViewModel">
+            <ViewCell>
+                <ScrollView x:Name="ParentScroll" Orientation="Horizontal" HeightRequest="{Binding HeightValue}">
+                    <Grid HeightRequest="{Binding HeightValue}" WidthRequest="{Binding Source={x:Reference ParentScroll}, Path=WidthRequest}" BackgroundColor="{Binding BackgroundColor}"/>
+                </ScrollView>
+            </ViewCell>
+        </DataTemplate>
+        <views:BasicTemplateSelector x:Key="templateSelector"
+                                     NormalTemplate="{StaticResource cellTemplate}"
+                                     ScrollableTemplate="{StaticResource scrollableTemplate}"/>
+    </ContentPage.Resources>
+    <ListView x:Name="list" ItemsSource="{Binding Cells}" ItemTemplate="{StaticResource templateSelector}" HasUnevenRows="True" BackgroundColor="Blue"/>
+</ContentPage>
+

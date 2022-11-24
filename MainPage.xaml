@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:iOSCellReuseBug"
+             x:Class="iOSCellReuseBug.MainPage"
+             x:Name="this">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="cellTemplate" x:DataType="local:CellViewModel">
+            <ViewCell>
+                <Grid HeightRequest="{Binding HeightValue}" BackgroundColor="{Binding BackgroundColor}"/>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <ListView x:Name="list" ItemsSource="{Binding Cells}" ItemTemplate="{StaticResource cellTemplate}" HasUnevenRows="True" BackgroundColor="Blue"/>
+</ContentPage>
+
