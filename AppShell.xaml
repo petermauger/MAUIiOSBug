@@ -10,6 +10,7 @@
         <ShellContent Title="Simple" ContentTemplate="{DataTemplate views:SimplePage}" />
         <ShellContent Title="Safe Template" ContentTemplate="{DataTemplate views:TemplateSelectorPage}" />
         <ShellContent Title="Bad Template" ContentTemplate="{DataTemplate views:TemplateSelectorPage}" />
+        <ShellContent Title="CollectionView" ContentTemplate="{DataTemplate views:CollectionViewPage}" />
     </TabBar>
 
 </Shell>

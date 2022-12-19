@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:iOSCellReuseBug"
+             xmlns:views="clr-namespace:iOSCellReuseBug.Views"
+             x:Class="iOSCellReuseBug.Views.CollectionViewPage"
+             Title="CollectionViewPage">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="cellTemplate" x:DataType="local:CellViewModel">
+            <Grid HeightRequest="{Binding HeightValue}" BackgroundColor="{Binding BackgroundColor}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="scrollableTemplate" x:DataType="local:ScrollableCellViewModel">
+            <ContentView x:Name="MakesThisWork">
+                <ScrollView x:Name="ParentScroll" Orientation="Horizontal" HeightRequest="{Binding HeightValue}">
+                    <Grid HeightRequest="{Binding HeightValue}" WidthRequest="{Binding Source={x:Reference ParentScroll}, Path=WidthRequest}" BackgroundColor="{Binding BackgroundColor}"/>
+                </ScrollView>
+            </ContentView>
+        </DataTemplate>
+        <views:BasicTemplateSelector x:Key="templateSelector"
+                                     NormalTemplate="{StaticResource cellTemplate}"
+                                     ScrollableTemplate="{StaticResource scrollableTemplate}"/>
+    </ContentPage.Resources>
+    <CollectionView x:Name="list" ItemsSource="{Binding Cells}" ItemTemplate="{StaticResource templateSelector}" BackgroundColor="Blue"/>
+</ContentPage>
